@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('register', 'petugas@register');
+Route::post('login', 'petugas@login');
+
+
+Route::get('user', 'petugas@getAuthenticatedUser')->middleware('jwt.verify');
