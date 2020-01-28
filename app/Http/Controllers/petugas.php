@@ -54,4 +54,51 @@ class petugas extends Controller
 
         return response()->json(compact('user','token'),201);
     }
+    public function update($id,Request $req)
+    {
+        $validator=Validator::make($req->all(),
+        [
+            'nama_petugas'=>'required',
+            'username'=>'required',
+            'password'=>'required',
+            'alamat'=>'required',
+            'telp'=>'required',
+            'level'=>'required'
+        ]
+        );
+        if($validator->fails()){
+            return Response()->json($validator->errors());
+        }
+        $ubah=User::where('id',$id)->update([
+            'nama_petugas'=>$req->nama_petugas,
+            'username'=>$req->username,
+            'password'=>$req->password,
+            'alamat'=>$req->alamat,
+            'telp'=>$req->telp,
+            'level'=>$req->level,
+        ]);
+        if($ubah){
+            $data['message'] = 'Petugas Berhasil diubah';
+            return Response()->json($data);
+        } else {
+            $data['message'] = 'Petugas gagal diubah';
+            return Response()->json($data);
+        }
+    }
+    public function destroy($id)
+    {
+        $hapus=User::where('id',$id)->delete();
+        if($hapus){
+            $pesan['message'] = 'Petugas berhasil dihapus';
+            return Response()->json($pesan);
+        }else{
+            $pesan['message'] = 'Petugas gagal dihapus';
+            return Response()->json($pesan);
+        }
+    }
+    public function tampil_petugas()
+    {
+        $data_petugas=User::get();
+        return Response()->json($data_petugas);
+    }
 }

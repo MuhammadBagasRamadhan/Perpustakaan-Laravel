@@ -18,6 +18,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('register', 'petugas@register');
 Route::post('login', 'petugas@login');
+Route::put('/ubah_petugas/{id}', 'petugas@update');
+Route::delete('/hapus_petugas/{id}', 'petugas@destroy');
+Route::get('/tampil_petugas', 'petugas@tampil_petugas');
 
 
 Route::get('user', 'petugas@getAuthenticatedUser')->middleware('jwt.verify');
+
+Route::post('/simpan_buku','buku@store');
+Route::put('/ubah_buku/{id}', 'buku@update');
+Route::delete('/hapus_buku/{id}', 'buku@destroy');
+Route::get('buku', 'buku@index')->middleware('jwt.verify');
+
+Route::post('/simpan_anggota','anggota@simpan');
+Route::put('/ubah_anggota/{id}', 'anggota@update');
+Route::delete('/hapus_anggota/{id}', 'anggota@destroy');
