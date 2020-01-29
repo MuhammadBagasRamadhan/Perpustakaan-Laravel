@@ -96,9 +96,14 @@ class petugas extends Controller
             return Response()->json($pesan);
         }
     }
-    public function tampil_petugas()
+    public function tampil_anggota()
     {
-        $data_petugas=User::get();
-        return Response()->json($data_petugas);
+        if(Auth::User()->level=="admin"){
+            $dt_buku=User::get();
+            return Response()->json($dt_buku);
+        } else {
+            $pesan['message'] = 'kamu buka admin bro maap';
+            return Response()->json($pesan);
+        }
     }
 }

@@ -75,5 +75,15 @@ class anggota extends Controller
             return Response()->json($pesan);
         }
     }
+    public function tampil_anggota()
+    {
+        if(Auth::User()->level=="admin"){
+            $dt_buku=Anggota_model::get();
+            return Response()->json($dt_buku);
+        } else {
+            $pesan['message'] = 'kamu buka admin bro maap';
+            return Response()->json($pesan);
+        }
+    }
     
 }

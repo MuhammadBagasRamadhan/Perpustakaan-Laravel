@@ -21,6 +21,7 @@ Route::post('login', 'petugas@login');
 Route::put('/ubah_petugas/{id}', 'petugas@update');
 Route::delete('/hapus_petugas/{id}', 'petugas@destroy');
 Route::get('/tampil_petugas', 'petugas@tampil_petugas');
+Route::get('/tampil_anggota', 'anggota@tampil_anggota')->middleware('jwt.verify');
 
 
 Route::get('user', 'petugas@getAuthenticatedUser')->middleware('jwt.verify');
